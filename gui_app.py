@@ -18,17 +18,14 @@ def run_script_in_background():
     output_file = output_file_entry.get()
 
     try:
-        # Lancer le script en arrière-plan en utilisant le module subprocess
         subprocess.Popen(["python", "clean_xml.py", input_file, output_file], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         status_label.config(text="Le script a été lancé en arrière-plan.")
     except Exception as e:
         status_label.config(text="Une erreur s'est produite : " + str(e))
 
-# Créer une fenêtre Tkinter
 root = tk.Tk()
 root.title("Application avec GUI")
 
-# Ajouter des éléments à la fenêtre
 title_label = tk.Label(root, text="Application avec GUI")
 title_label.pack(pady=10)
 
@@ -50,5 +47,4 @@ run_button.pack()
 status_label = tk.Label(root, text="")
 status_label.pack(pady=5)
 
-# Démarrer la boucle Tkinter
 root.mainloop()
