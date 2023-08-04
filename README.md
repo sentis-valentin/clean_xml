@@ -16,6 +16,6 @@ Une fois finit, le script indique `$ Les données ont été récupérées et enr
 Pour Windows, double-cliquer sur le fichier clean_xml.exe, une fenêtre s'ouvre, proposant de choisir 1) le tableur excel contenant les URL, 2) le nom et l'emplacement du fichier de sortie.
 Une fois cela fait, cliquer sur _Lancer le script_.
 
-![GUI](/GUI.png)
+![GUI](/GUI.png#center)
 
 A la fin, un fichier _log.txt_ est créé.
