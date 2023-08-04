@@ -20,7 +20,7 @@ Une fois les informations trouvées, le script les isncrits dans un nouveau tabl
 
 Pour adapter le script, il faut changer le nom du fichier et son emplacement sur cette ligne :
 
-`df_urls = pd.read_excel('**856_url_test.xlsx**', sheet_name='Feuil1')`
+`df_urls = pd.read_excel('856_url_test.xlsx', sheet_name='Feuil1')`
 
 
 ## Description
