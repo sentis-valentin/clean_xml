@@ -1,11 +1,18 @@
 # clean_xml
 Nettoyer les appels d'API Gallica SRU
 
+# Contexte
+
+Ces script sont fait dans le but de récupérer des cotes et liens pour enrichir un SIGB.
+S'agissant d'une bibliothèque numérique Gallica Marque Blanche (GMB), l'usage de l'API de recherche Gallica permet cela.
+
+Le tout se compose de 
+
 ## Description
 Il s'agit d'un fichier script et d'un fichier .exe pour profiter d'un GUI sur Windows.
 Avant tout, sur un système Unix, avoir python puis installer les bibliothèques suivantes :
 
-`pip install requests openpyxl pandas bs4`
+`pip install tk requests openpyxl pandas bs4`
 
 Après cela, éxécuter le script dans le dossier contenant le fichier excel : 
 
@@ -19,3 +26,12 @@ Une fois cela fait, cliquer sur _Lancer le script_.
 ![GUI](/GUI.png#center)
 
 A la fin, un fichier _log.txt_ est créé.
+
+## GUI Windows
+
+Si vous voulez adapter le code, voici comment créer le fichier .exe.
+
+Installer les dépendances :
+`pip install pyinstaller`
+, adaptez app.spec, puis : 
+`pyinstaller app.spec`
