@@ -6,7 +6,22 @@ Nettoyer les appels d'API Gallica SRU
 Ces script sont fait dans le but de récupérer des cotes et liens pour enrichir un SIGB.
 S'agissant d'une bibliothèque numérique Gallica Marque Blanche (GMB), l'usage de l'API de recherche Gallica permet cela.
 
-Le tout se compose de 
+Le tout se compose de 4 script : 
+
+- app.py, contenant tout ce qu'il faut pour créer le fichier .exe pour Windows
+- gui_app.py, permettant la création et l'utilisation de la fenêtre d'application (GUI)
+- clean_xml.py, étant le script lancé en arrière-plan par gui_app.py
+- main.py, le script à proprement dit
+  
+## main.py
+
+Le script s'occupe de chercher l'url d'appel de l'API SRU de gallica ou d'une GMB dans un tableur Excel, ligne par ligne, puis recherche les balises XML (dans mon cas dc:identifier, dc:relation et dc:source).
+Une fois les informations trouvées, le script les isncrits dans un nouveau tableur Excel, avec comme nom de colonne les balises recherchées.
+
+Pour adapter le script, il faut changer le nom du fichier et son emplacement sur cette ligne :
+
+`df_urls = pd.read_excel('**856_url_test.xlsx**', sheet_name='Feuil1')`
+
 
 ## Description
 Il s'agit d'un fichier script et d'un fichier .exe pour profiter d'un GUI sur Windows.
