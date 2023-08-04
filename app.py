@@ -29,11 +29,9 @@ def run_script_in_background():
     except Exception as e:
         status_label.config(text="Une erreur s'est produite : " + str(e))
 
-# Créer une fenêtre Tkinter
 root = tk.Tk()
 root.title("Application avec GUI")
 
-# Ajouter des éléments à la fenêtre
 title_label = tk.Label(root, text="Application avec GUI")
 title_label.pack(pady=10)
 
@@ -55,10 +53,8 @@ run_button.pack()
 status_label = tk.Label(root, text="")
 status_label.pack(pady=5)
 
-# Démarrer la boucle Tkinter
 root.mainloop()
 
-# Configurer la journalisation vers un fichier log
 logging.basicConfig(filename='logs.txt', level=logging.DEBUG)
 
 def fetch_data_from_api(url, max_retries=5, retry_delay=5):
@@ -76,24 +72,19 @@ def fetch_data_from_api(url, max_retries=5, retry_delay=5):
     raise Exception("Impossible de récupérer les données après plusieurs tentatives.")
 
 def process_data(df_urls):
-    # Liste pour stocker les données
+  
     data = []
 
-    # Parcourir les URLs d'API
     for index, api_url in enumerate(df_urls['api_url'], start=1):
         try:
-            # Récupérez les données depuis l'API avec gestion d'erreur et réessai
             xml_data = fetch_data_from_api(api_url)
 
-            # Analysez le contenu XML de la réponse avec BeautifulSoup
             soup = BeautifulSoup(xml_data, "xml")
 
-            # Récupérez les balises dc:identifier et dc:relation
             identifiers = soup.find_all("dc:identifier")
             relations = soup.find_all("dc:relation")
             source = soup.find_all("dc:source")
 
-            # Parcourez les balises dc:identifier et dc:relation
             for identifier, relation, source in zip(identifiers, relations, source):
                 identifier_text = identifier.get_text() if identifier else ""
                 relation_text = relation.get_text() if relation else ""
@@ -102,31 +93,24 @@ def process_data(df_urls):
         except Exception as e:
             logging.exception(f"Une erreur inattendue s'est produite lors de l'API {api_url} : {e}")
 
-        # Afficher un avertissement pour le décompte des objets traités
         logging.warning(f"{index}/{len(df_urls)} objets traités")
 
     return data
 
 def main(input_file, output_file):
     try:
-        # Lire le fichier Excel avec les URLs d'API
         df_urls = pd.read_excel(input_file, sheet_name='Feuil1')
 
-        # Traiter les données
         data = process_data(df_urls)
 
-        # Créez un nouveau classeur Excel
         workbook = openpyxl.Workbook()
         sheet = workbook.active
 
-        # Ajoutez les en-têtes des colonnes
         sheet.append(['dc:identifier', 'dc:relation', 'dc:source'])
 
-        # Insérez les données dans le tableur
         for row in data:
             sheet.append(row)
 
-        # Sauvegardez le fichier Excel
         workbook.save(output_file)
 
         print("Le traitement est terminé et les résultats sont sauvegardés dans", output_file)
